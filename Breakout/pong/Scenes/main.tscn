@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bspwumcgi8rbq"]
+
+[ext_resource type="PackedScene" uid="uid://0dwyvit5hc6l" path="res://Scenes/paddle.tscn" id="1_7d4pf"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_gb1fh"]
+[ext_resource type="PackedScene" uid="uid://dxedbhq2h8ubm" path="res://Scenes/ball.tscn" id="2_rdh6b"]
+[ext_resource type="PackedScene" uid="uid://ds0cg7m0o226t" path="res://Scenes/wall.tscn" id="3_d1yhr"]
+[ext_resource type="PackedScene" uid="uid://c0y4l6c1bmy44" path="res://Scenes/brick.tscn" id="4_k4o6a"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("txtScore")]
+script = ExtResource("1_gb1fh")
+brick_resource = ExtResource("4_k4o6a")
+txtScore = NodePath("Score")
+
+[node name="Ball" parent="." instance=ExtResource("2_rdh6b")]
+position = Vector2(563, 501)
+scale = Vector2(0.640001, 0.640001)
+
+[node name="Paddle" parent="." instance=ExtResource("1_7d4pf")]
+position = Vector2(603, 605)
+rotation = -1.5708
+scale = Vector2(0.673002, 1)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall_Top" parent="Walls" instance=ExtResource("3_d1yhr")]
+position = Vector2(0, -8)
+
+[node name="Wall_Bot" parent="Walls" instance=ExtResource("3_d1yhr")]
+position = Vector2(0, 661)
+
+[node name="Wall_Left" parent="Walls" instance=ExtResource("3_d1yhr")]
+position = Vector2(-10, 661)
+rotation = -1.5708
+scale = Vector2(0.600001, 1)
+
+[node name="Wall_Right" parent="Walls" instance=ExtResource("3_d1yhr")]
+position = Vector2(1162, 661)
+rotation = -1.5708
+scale = Vector2(0.600004, 1)
+
+[node name="Bricks" type="Node" parent="."]
+
+[node name="ref_Brick" parent="." instance=ExtResource("4_k4o6a")]
+visible = false
+position = Vector2(68, 95)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Score" type="Label" parent="."]
+offset_left = 1040.0
+offset_top = 531.0
+offset_right = 1325.0
+offset_bottom = 1213.0
+scale = Vector2(0.2, 0.2)
+theme_override_font_sizes/font_size = 500
+text = "0"
