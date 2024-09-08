@@ -4,6 +4,9 @@ extends CharacterBody2D
 
 const SPEED = 500.0
 
+func _ready():
+	position = Vector2(576, 550)
+
 func _process(delta):
 	shoot_bullet()
 
