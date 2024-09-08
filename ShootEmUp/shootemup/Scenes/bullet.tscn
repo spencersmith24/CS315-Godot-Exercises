@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cckenpnu5n1o7"]
+[gd_scene load_steps=4 format=3 uid="uid://cckenpnu5n1o7"]
 
 [ext_resource type="Texture2D" uid="uid://dnsbiwudpgiss" path="res://Assets/laserBlue01.png" id="1_2ui1u"]
+[ext_resource type="Script" path="res://Scenes/bullet.gd" id="1_aib35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qukah"]
 size = Vector2(10, 28)
 
 [node name="Bullet" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_aib35")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)

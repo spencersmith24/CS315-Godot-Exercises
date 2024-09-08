@@ -4,6 +4,14 @@ extends CharacterBody2D
 
 const SPEED = 500.0
 
+func _process(delta):
+	
+	if Input.is_action_just_pressed("shoot"):
+		var bullet = bullet_resource.instantiate()
+		bullet.position = position
+		add_child(bullet)
+		
+
 func _physics_process(delta):
 	var ship_direction: Vector2
 	
