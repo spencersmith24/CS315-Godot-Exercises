@@ -5,12 +5,7 @@ extends CharacterBody2D
 const SPEED = 500.0
 
 func _process(delta):
-	
-	if Input.is_action_just_pressed("shoot"):
-		var bullet = bullet_resource.instantiate()
-		bullet.position.y -= 80
-		add_child(bullet)
-		
+	shoot_bullet()
 
 func _physics_process(delta):
 	var ship_direction: Vector2
@@ -26,3 +21,11 @@ func _physics_process(delta):
 	
 	velocity = ship_direction.normalized() * SPEED
 	move_and_slide()
+
+
+func shoot_bullet():
+	
+	if Input.is_action_just_pressed("shoot"):
+		var bullet = bullet_resource.instantiate()
+		bullet.position.y -= 80
+		add_child(bullet)
