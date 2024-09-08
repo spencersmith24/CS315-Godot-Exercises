@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var bullet_resource: Resource
+
 const SPEED = 500.0
 
 func _physics_process(delta):
