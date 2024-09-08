@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cckenpnu5n1o7"]
+
+[ext_resource type="Texture2D" uid="uid://dnsbiwudpgiss" path="res://Assets/laserBlue01.png" id="1_2ui1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qukah"]
+size = Vector2(10, 28)
+
+[node name="Bullet" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+scale = Vector2(1.24, 1)
+shape = SubResource("RectangleShape2D_qukah")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2ui1u")
