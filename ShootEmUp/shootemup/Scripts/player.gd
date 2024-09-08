@@ -8,7 +8,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("shoot"):
 		var bullet = bullet_resource.instantiate()
-		bullet.position = position
+		bullet.position.y -= 80
 		add_child(bullet)
 		
 
