@@ -14,6 +14,10 @@ func _process(delta):
 
 
 func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	get_parent().get_parent().increment_score()
-	queue_free()
-	body.queue_free()
+	if body.name.match("Bullet"):
+		get_parent().get_parent().increment_score()
+		queue_free()
+		body.queue_free()
+	elif body.name.match("Player"):
+		body.queue_free()
+		queue_free()

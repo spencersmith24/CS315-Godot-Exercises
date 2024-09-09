@@ -16,7 +16,7 @@ script = ExtResource("3_ivotb")
 enemy_resource = ExtResource("2_pnq5w")
 
 [node name="Timer" type="Timer" parent="EnemySpawner"]
-wait_time = 1.5
+wait_time = 0.5
 autostart = true
 
 [node name="Label" type="Label" parent="."]

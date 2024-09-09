@@ -27,7 +27,6 @@ func _physics_process(delta):
 
 
 func shoot_bullet():
-	
 	if Input.is_action_just_pressed("shoot"):
 		var bullet = bullet_resource.instantiate()
 		bullet.position.y -= 80
