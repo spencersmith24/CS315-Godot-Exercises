@@ -1,65 +1,141 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuhodhpcehk7o"]
+[gd_scene load_steps=10 format=3 uid="uid://cuhodhpcehk7o"]
 
-[ext_resource type="Texture2D" uid="uid://csokx1mexoubp" path="res://assets/tappyplane/Spritesheet/planes.png" id="1_02shb"]
-[ext_resource type="Script" path="res://scenes/plane.gd" id="1_l6xde"]
+[ext_resource type="Script" path="res://scripts/flappyController.gd" id="1_kp0fp"]
+[ext_resource type="PackedScene" uid="uid://ddk7rb68i6ub4" path="res://scenes/plane.tscn" id="1_r8xht"]
+[ext_resource type="PackedScene" uid="uid://dy1chour0yc5n" path="res://scenes/rock.tscn" id="2_6cfjw"]
+[ext_resource type="AudioStream" uid="uid://kd35m82owfdq" path="res://assets/Music/Three Red Hearts - Modern Bits.ogg" id="4_74uxh"]
+[ext_resource type="AudioStream" uid="uid://bbi4go1ld3pcv" path="res://assets/kenney_impact-sounds/Audio/impactPlate_heavy_004.ogg" id="5_gydqk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3sbb1"]
+[sub_resource type="Animation" id="Animation_vnt4q"]
+resource_name = "slide_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(272, -120), Vector2(272, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Button:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, -100), Vector2(400, 296)]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7o3ha"]
-atlas = ExtResource("1_02shb")
-region = Rect2(88, 73, 88, 73)
+[sub_resource type="Animation" id="Animation_lejl4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(272, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Button:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 296)]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iae5n"]
-atlas = ExtResource("1_02shb")
-region = Rect2(88, 146, 88, 73)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_55ayl"]
+_data = {
+"RESET": SubResource("Animation_lejl4"),
+"slide_in": SubResource("Animation_vnt4q")
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rbpux"]
-atlas = ExtResource("1_02shb")
-region = Rect2(88, 219, 88, 73)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lt02t"]
-atlas = ExtResource("1_02shb")
-region = Rect2(88, 146, 88, 73)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nrb0m"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7o3ha")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iae5n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rbpux")
-}],
-"loop": true,
-"name": &"flap",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lt02t")
-}],
-"loop": true,
-"name": &"glide",
-"speed": 5.0
-}]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nndqq"]
 
 [node name="spinnyplane" type="Node2D"]
+script = ExtResource("1_kp0fp")
+rock_resource = ExtResource("2_6cfjw")
 
-[node name="plane" type="RigidBody2D" parent="."]
-position = Vector2(256, 183)
-gravity_scale = 0.5
-script = ExtResource("1_l6xde")
-metadata/_edit_group_ = true
+[node name="Plane" parent="." instance=ExtResource("1_r8xht")]
+position = Vector2(220, 300)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="plane"]
-shape = SubResource("CircleShape2D_3sbb1")
+[node name="RockTimer" type="Timer" parent="."]
+autostart = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="plane"]
-sprite_frames = SubResource("SpriteFrames_nrb0m")
-animation = &"glide"
-autoplay = "glide"
+[node name="Rocks" type="Node" parent="."]
 
-[connection signal="animation_finished" from="plane/AnimatedSprite2D" to="plane" method="_on_animated_sprite_2d_animation_finished"]
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("4_74uxh")
+autoplay = true
+
+[node name="Thud" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("5_gydqk")
+volume_db = 15.0
+
+[node name="GameOver" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 120.0
+offset_right = 5700.0
+offset_bottom = 1482.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 1000
+text = "Game Over"
+
+[node name="Button" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 296.0
+offset_right = 1902.0
+offset_bottom = 713.0
+scale = Vector2(0.15, 0.15)
+theme_override_font_sizes/font_size = 300
+text = "Play Again"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_55ayl")
+}
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(557, 509)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 144)
+shape = SubResource("WorldBoundaryShape2D_nndqq")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(553, 142)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(0, 144)
+shape = SubResource("WorldBoundaryShape2D_nndqq")
+
+[connection signal="timeout" from="RockTimer" to="." method="_on_rock_timer_timeout"]
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
