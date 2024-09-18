@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuhodhpcehk7o"]
+
+[ext_resource type="Texture2D" uid="uid://csokx1mexoubp" path="res://assets/tappyplane/Spritesheet/planes.png" id="1_02shb"]
+[ext_resource type="Script" path="res://scenes/plane.gd" id="1_l6xde"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3sbb1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o3ha"]
+atlas = ExtResource("1_02shb")
+region = Rect2(88, 73, 88, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iae5n"]
+atlas = ExtResource("1_02shb")
+region = Rect2(88, 146, 88, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbpux"]
+atlas = ExtResource("1_02shb")
+region = Rect2(88, 219, 88, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt02t"]
+atlas = ExtResource("1_02shb")
+region = Rect2(88, 146, 88, 73)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nrb0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o3ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iae5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbpux")
+}],
+"loop": true,
+"name": &"flap",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt02t")
+}],
+"loop": true,
+"name": &"glide",
+"speed": 5.0
+}]
+
+[node name="spinnyplane" type="Node2D"]
+
+[node name="plane" type="RigidBody2D" parent="."]
+position = Vector2(256, 183)
+gravity_scale = 0.5
+script = ExtResource("1_l6xde")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="plane"]
+shape = SubResource("CircleShape2D_3sbb1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="plane"]
+sprite_frames = SubResource("SpriteFrames_nrb0m")
+animation = &"glide"
+autoplay = "glide"
+
+[connection signal="animation_finished" from="plane/AnimatedSprite2D" to="plane" method="_on_animated_sprite_2d_animation_finished"]
