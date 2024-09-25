@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfx4aiwp52sku"]
+
+[ext_resource type="Script" path="res://scripts/GameController.gd" id="1_0e62q"]
+[ext_resource type="TileSet" uid="uid://bbu0d885idvxi" path="res://assets/tile_set.tres" id="2_typu7"]
+[ext_resource type="PackedScene" uid="uid://pmjoeps6r27x" path="res://scenes/player.tscn" id="3_5rddy"]
+[ext_resource type="PackedScene" uid="uid://c6vg4rdelo8tp" path="res://scenes/coin.tscn" id="4_xfulu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cgy7m"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("txtScore")]
+script = ExtResource("1_0e62q")
+txtScore = NodePath("Player/Camera2D/Score")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_typu7")
+format = 2
+layer_0/tile_data = PackedInt32Array(458755, 131072, 0, 458756, 131072, 0, 458757, 131072, 0, 458758, 131072, 0, 458759, 131072, 0, 458760, 131072, 0, 458761, 131072, 0, 458762, 131072, 0, 458763, 131072, 0, 458764, 131072, 0, 458765, 131072, 0, 458766, 131072, 0, 458767, 131072, 0, 327699, 131072, 0, 327700, 131072, 0, 327703, 131072, 0, 327706, 131072, 0, 327709, 131072, 0, 524320, 131072, 0, 524321, 131072, 0, 524322, 131072, 0, 524323, 131072, 0, 524324, 131072, 0, 524325, 131072, 0, 524326, 131072, 0, 524327, 131072, 0, 393230, 327680, 0, 262164, 524288, 0, 458785, 524288, 2, 458786, 524288, 2, 458787, 524288, 2, 458788, 524288, 2, 458789, 589824, 2, 458784, 458752, 2)
+
+[node name="WorldBorder" type="Area2D" parent="."]
+position = Vector2(0, 246)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder"]
+shape = SubResource("WorldBoundaryShape2D_cgy7m")
+
+[node name="Player" parent="." instance=ExtResource("3_5rddy")]
+position = Vector2(72, 96)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+
+[node name="Score" type="Label" parent="Player/Camera2D"]
+offset_left = -181.0
+offset_top = -100.0
+offset_right = -38.0
+offset_bottom = 242.0
+scale = Vector2(0.106556, 0.106556)
+theme_override_font_sizes/font_size = 250
+text = "0"
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("4_xfulu")]
+position = Vector2(205, 104)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("4_xfulu")]
+position = Vector2(367, 69)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_xfulu")]
+position = Vector2(422, 72)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("4_xfulu")]
+position = Vector2(472, 72)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("4_xfulu")]
+position = Vector2(559, 118)
+
+[connection signal="body_entered" from="WorldBorder" to="." method="_on_world_border_body_entered"]
