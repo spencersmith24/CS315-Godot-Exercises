@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://buyqtg2al20u8"]
+
+[ext_resource type="Texture2D" uid="uid://bw0q1bxn8x1tm" path="res://assets/happy-guy-celebrating-with-hands-up.jpg" id="1_6fe0i"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-2, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(530, 276)
+texture = ExtResource("1_6fe0i")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 11062.0
+offset_bottom = 3454.0
+scale = Vector2(0.1, 0.1)
+theme_override_colors/font_color = Color(0, 0.690196, 0, 1)
+theme_override_font_sizes/font_size = 2500
+text = "YOU WIN"
