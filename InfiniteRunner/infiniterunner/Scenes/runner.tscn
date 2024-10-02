@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://bj78e2qx4b70t"]
+
+[ext_resource type="PackedScene" uid="uid://b2h2d56s8lavu" path="res://Scenes/RunnerGround.tscn" id="1_r2bri"]
+[ext_resource type="Script" path="res://Scripts/InfinitePlayer.gd" id="2_xcg5j"]
+[ext_resource type="AudioStream" uid="uid://bgu2cvbeeejxx" path="res://assets/inf sounds/Ludum Dare 38 - Track 2.wav" id="3_h4ai8"]
+[ext_resource type="Texture2D" uid="uid://ouxli5u0y7tb" path="res://assets/crash_0.png" id="3_pphwa"]
+[ext_resource type="AudioStream" uid="uid://bufj8qvn76ujp" path="res://assets/inf sounds/jump.wav" id="4_mhgpf"]
+[ext_resource type="Texture2D" uid="uid://b2ojejo54uwae" path="res://assets/crash_1.png" id="4_wbaxb"]
+[ext_resource type="Texture2D" uid="uid://dhgfd48enp28s" path="res://assets/tile_0040.png" id="5_d564t"]
+[ext_resource type="AudioStream" uid="uid://deo7ndh72smd6" path="res://assets/inf sounds/crash.wav" id="5_dc8kd"]
+[ext_resource type="Texture2D" uid="uid://b7yr50sjonjth" path="res://assets/tile_0041.png" id="6_i8apu"]
+[ext_resource type="Texture2D" uid="uid://bbrsiqjfvrrxo" path="res://assets/tile_0042.png" id="7_ysaua"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k31la"]
+radius = 8.33334
+height = 17.3333
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yn83m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pphwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wbaxb")
+}],
+"loop": true,
+"name": &"crash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d564t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i8apu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ysaua")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="runner" type="Node2D"]
+
+[node name="Ground" parent="." instance=ExtResource("1_r2bri")]
+position = Vector2(287, 474)
+script = null
+
+[node name="Ground2" parent="." instance=ExtResource("1_r2bri")]
+position = Vector2(695, 474)
+script = null
+
+[node name="Ground3" parent="." instance=ExtResource("1_r2bri")]
+position = Vector2(1087, 474)
+script = null
+
+[node name="Ground4" parent="." instance=ExtResource("1_r2bri")]
+position = Vector2(1435, 474)
+script = null
+
+[node name="Ground5" parent="." instance=ExtResource("1_r2bri")]
+position = Vector2(1780, 474)
+script = null
+
+[node name="InfinitePlayer" type="CharacterBody2D" parent="."]
+position = Vector2(257, 357)
+scale = Vector2(3, 3)
+script = ExtResource("2_xcg5j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InfinitePlayer"]
+shape = SubResource("CapsuleShape2D_k31la")
+
+[node name="Camera2D" type="Camera2D" parent="InfinitePlayer"]
+position = Vector2(0, 1)
+scale = Vector2(0.333333, 0.333333)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InfinitePlayer"]
+sprite_frames = SubResource("SpriteFrames_yn83m")
+animation = &"crash"
+autoplay = "run"
+
+[node name="Sound Effects" type="Node2D" parent="InfinitePlayer"]
+position = Vector2(-85.6667, -119)
+scale = Vector2(0.333333, 0.333333)
+
+[node name="BG Music" type="AudioStreamPlayer2D" parent="InfinitePlayer/Sound Effects"]
+stream = ExtResource("3_h4ai8")
+autoplay = true
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="InfinitePlayer/Sound Effects"]
+stream = ExtResource("4_mhgpf")
+
+[node name="Crash" type="AudioStreamPlayer2D" parent="InfinitePlayer/Sound Effects"]
+stream = ExtResource("5_dc8kd")
