@@ -73,6 +73,7 @@ script = ExtResource("1_kp0fp")
 rock_resource = ExtResource("2_6cfjw")
 
 [node name="Plane" parent="." instance=ExtResource("1_r8xht")]
+visible = false
 position = Vector2(220, 300)
 
 [node name="RockTimer" type="Timer" parent="."]
@@ -91,7 +92,6 @@ stream = ExtResource("5_gydqk")
 volume_db = 15.0
 
 [node name="GameOver" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

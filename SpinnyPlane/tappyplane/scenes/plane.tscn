@@ -57,7 +57,7 @@ shape = SubResource("CircleShape2D_3sbb1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nrb0m")
-animation = &"glide"
+animation = &"flap"
 autoplay = "glide"
 
 [node name="Flap" type="AudioStreamPlayer2D" parent="."]

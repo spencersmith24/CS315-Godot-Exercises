@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvlh66salo7ql"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_re622"]
+radius = 0.476863
+
+[sub_resource type="SphereMesh" id="SphereMesh_cvp8j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyudm"]
+albedo_color = Color(0.955075, 0.405051, 0.359291, 1)
+
+[node name="Ball" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36064, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_re622")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_cvp8j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kyudm")
