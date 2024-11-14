@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bph8v5dhytgrn"
+path="res://.godot/imported/SunShine Cafe Muncie.mp3-6a7f672aacf9ba9b5211e3e878df5a96.mp3str"
+
+[deps]
+
+source_file="res://SunShine Cafe Muncie.mp3"
+dest_files=["res://.godot/imported/SunShine Cafe Muncie.mp3-6a7f672aacf9ba9b5211e3e878df5a96.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
